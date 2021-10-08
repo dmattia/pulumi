@@ -22,3 +22,6 @@
 
 - [codegen/go] - Use `importBasePath` before `name` if specified
   [#8159](https://github.com/pulumi/pulumi/pull/8159)
+
+- [docs] - Fix broken lists in dotnet docs
+  [docs#6558](https://github.com/pulumi/docs/issues/6558)
