@@ -160,6 +160,8 @@ export function run(
     const defaultTsConfigPath = "tsconfig.json";
     const tsConfigPath: string = process.env["PULUMI_NODEJS_TSCONFIG_PATH"] ?? defaultTsConfigPath;
     const skipProject = !fs.existsSync(tsConfigPath);
+    
+    const typeCheck = (process.env["PULUMI_NODEJS_TYPECHECK"] ?? "true") === "true";
 
     let compilerOptions: object;
     try {
@@ -172,7 +174,7 @@ export function run(
 
     if (typeScript) {
         tsnode.register({
-            typeCheck: true,
+            typeCheck,
             skipProject: skipProject,
             compilerOptions: {
                 target: "es6",
@@ -239,7 +241,8 @@ ${defaultMessage}`);
     programStarted();
 
     // This needs to occur after `programStarted` to ensure execution of the parent process stops.
-    if (skipProject && tsConfigPath !== defaultTsConfigPath) {
+    if (skipProject && tsConfigPath !== 
+       ) {
         return new Promise(() => {
             const e = new Error(`tsconfig path was set to ${tsConfigPath} but the file was not found`);
             e.stack = undefined;
